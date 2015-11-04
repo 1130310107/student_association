@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{{communityName}}社团物资管理</title>
+
+<link rel="stylesheet" href="css/index.css" type="text/css" media="screen">
+<link rel="stylesheet" href="css/add.css" type="text/css" media="screen">
+<link rel="stylesheet" href="css/index.css" type="text/css" media="screen">
+<link rel="stylesheet" href="css/add.css" type="text/css" media="screen">
+<link href="css/bootstrap-theme.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="page-header">
+				<h1>
+					{{communityName}}社团物资管理 <small></small>
+				</h1>
+			</div>
+			<div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="search" class="form-control" name="author" placeholder="按类别查询" id="id_search_input" autofocus>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-info" type="submit">查询</button>
+                            </div>
+                        </div>
+			<br><br><br>
+			<div class="col-md-12 column">
+			<table class="table table-hover table-condensed table-bordered">
+				<thead>
+					<tr>
+						<th>
+							编号
+						</th>
+						<th>
+							物资名
+						</th>
+						<th>
+							来源
+						</th>
+						<th>
+							数量
+						</th>
+						<th>
+							单位
+						</th>
+						<th>
+							使用程度
+						</th>
+						<th>
+							类别
+						</th>
+						<th>
+							操作
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for member in member_list %}
+					<tr>
+						<td>{{ forloop.counter }}</td>
+						<td>{{ member.name }}</td>
+						<td>{{ member.from }}</td>
+						<td>{{ member.number }}</td>
+						<td>{{ member.unit }}</td>
+						<td>{{ member.condition }}</td>
+						<td>{{ member.category }}</td>
+						<td><button class="btn btn-info" type="submit">修改</button><button class="btn btn-info" type="submit">删除</button>
+					</tr>
+					{% empty %}
+					<tr>
+						<td>暂无</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div align="center">
+			<ul class="pagination">
+				<li>
+					 <a href="#">Prev</a>
+				</li>
+				{% for member_list in member_lists %}
+				<li>
+					 <a href="#">{{ forloop.counter }}</a>
+				</li>
+				{% endfor %}
+				<li>
+					 <a href="#">Next</a>
+				</li>
+			</ul>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <div class="layout_footer">
+        <p>Copyright © 2015 - Hunters all rights.</p>
+    </div>
+</body></html>
