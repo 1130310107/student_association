@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<head>
+	<title>活动报名</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/add.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/ystep.css">
+    <script src="js/ystep.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</head>
+<body style="background-color: #ffffff">
+
+    <div class="div_from_aoto" style="width: 900px;">
+	
+
+			<div class="panel-group" id="panel-248445">
+			{%for acti in acti_ing_list%}
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-248445" href="#panel-element-{{acti.id}}">{acti.title}&nbsp报名截止时间：{acti.app_end_date}</a>
+					</div>
+					<div id="panel-element-{{acti.id}}" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<div id="update_detail_{{acti.id}}">
+
+							<br>
+							<div class="ystep{{acti.id}}"></div>
+							<script>
+							//根据jQuery选择器找到需要加载ystep的容器
+							//loadStep 方法可以初始化ystep
+
+
+							$(".ystep{{acti.id}}").loadStep({
+							size: "large",
+							color: "blue",
+							steps: [
+							{%for step in acti.steps%}
+							{
+							title: "{{step.title}}",
+							content: "{{step.content}}",
+							pricipal:"{{step.pricipal}}"
+							},
+							{%endfor%}]
+							});
+
+							$(".ystep{{acti.id}}").setStep({{acti.location}});
+							</script>
+							<br>
+							<div>请选择您想参与的步骤：</div>
+
+							<form action="{%url chooseSteps%}">
+							<select multiple="multiple" name="choose_steps_{{acti.id}}">
+							{%for step in acti.steps%}
+							<option value="step_{{forloop.counter}}">step{{foorloop.counter}}</option>
+							{%endfor%}
+							</select>
+							<button type="button" class="btn btn-default">提交</button>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+
+				
+			</div>
+      
+		</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
